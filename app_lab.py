@@ -1,7 +1,7 @@
 # Chegali
 def chegali(p: float, m: float, v: float):
     """
-        فانکشن محاسبه چگالی
+        متد محاسبه چگالی
     Args:
         p (float, optional): [چگالی]. Defaults to -1.
         m (float, optional): [جرم]. Defaults to -1.
