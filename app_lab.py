@@ -1,4 +1,15 @@
-# Chegali
+#-----------------------------------
+#Imports
+#-----------------------------------
+
+#-----------------------------------
+# Variables
+#-----------------------------------
+
+#-----------------------------------
+#Functions
+#-----------------------------------
+# Chegali method
 def chegali(p: float, m: float, v: float):
     """
         فانکشن محاسبه چگالی
@@ -17,10 +28,7 @@ def chegali(p: float, m: float, v: float):
     else:
         return m/p
 
-
-
-
-#khoon
+#khoon method
 def khoon(antiA , antiB , antiD):
     """
     تایین گروه خونی
@@ -46,10 +54,7 @@ def khoon(antiA , antiB , antiD):
     else :
         print('A+')
 
-
-
-
-#takhmin_masafat
+#takhmin_masafat method
 def takhmin_masafat(meghias: float, f_map: float, f_ground : float) :
     """
     محاسبه مقیاس
@@ -68,7 +73,7 @@ def takhmin_masafat(meghias: float, f_map: float, f_ground : float) :
     else :
         return f_map/meghias
 
-#takhalkhol
+#takhalkhol method
 def cheshme(takhalkhol :float , v_sang :float ,v_kol :float):
     """
     محاسبه تخلخل
@@ -81,10 +86,12 @@ def cheshme(takhalkhol :float , v_sang :float ,v_kol :float):
     [type] : [مقدار تخلخل را با توجه به ورودی برمی گرداند]
 
     """
-
     if takhalkhol == -1 :
         return (v_sang/v_kol)*100
     elif v_sang == -1 :
         return (takhalkhol*v_sang)/100
     else:
         return (v_sang/takhalkhol)*100
+#------------------------------------
+#App
+#------------------------------------

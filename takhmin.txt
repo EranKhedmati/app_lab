@@ -1,4 +1,0 @@
-formol : meghias = f_map / f_ground
-meghias : مقیاس نقشه 
-f_map : فاصله دو نقطه روس نقشه 
-f_ground : فاصله دو نقطه روی زمین
