@@ -1,13 +1,18 @@
 #-----------------------------------
 #Imports
 #-----------------------------------
-
+from guizero import App , PushButton , Box , Picture , Text , Window
+import os
 #-----------------------------------
 # Variables
 #-----------------------------------
 
 #-----------------------------------
 #Functions
+#-----------------------------------
+
+#-----------------------------------
+#methods
 #-----------------------------------
 
 # Chegali method
@@ -93,6 +98,78 @@ def cheshme(takhalkhol :float , v_sang :float ,v_kol :float):
         return (takhalkhol*v_sang)/100
     else:
         return (v_sang/takhalkhol)*100
+
+#-----------------------------------
+#creat board
+#-----------------------------------
+def board():
+    buttons = Box(app , layout="grid")
+    for x in range(2):
+        for y in range(3):
+            button = PushButton(buttons , grid=[x,y] ,padx=60 , pady=60)
+
+    #-------------------------------
+    #creat windows
+    #-------------------------------
+    chegali_window = Window(app , title="chegali" , width=400 , height=530)
+    chegali_window.hide()
+
+    blood_window = Window(app , title="blood" , width=400 , height=530)
+    blood_window.hide()
+
+    meghias_window = Window(app , title="meghias" , width=400 , height=530)
+    meghias_window.hide()
+
+    takhalkhol_window = Window(app , title="takhalkhol" , width=400 , height=530)
+    takhalkhol_window.hide()
+    
+    test_window = Window(app , title="test" , width=400 , height=530)
+    test_window.hide()
+
+    Warning_window = Window(app , title="warning" , width=400 , height=530)
+    Warning_window.hide()
+
+    #-------------------------------
+    #Open buttond
+    #-------------------------------
+    def open_chegali():
+        chegali_window.show()
+
+    def open_blood():
+        blood_window.show()
+
+    def open_maghias():
+        meghias_window.show()
+
+    def open_takhalkhol():
+        takhalkhol_window.show()
+
+    def open_test():
+        test_window.show()
+    
+    def open_warning():
+        Warning_window.show()
+
+    #-------------------------------
+    #Picturs of buttons
+    #-------------------------------
+    chegali_botton = PushButton(buttons , command=open_chegali , image="chegali.png" , grid=[0,0])
+    
+    blood_button = PushButton(buttons , command=open_blood , image="blood.png" , grid=[1,0])
+
+    meghias_button = PushButton(buttons , command=open_maghias , image="meghias.png" , grid=[0,1])
+
+    takhalkhol_button = PushButton(buttons , command=open_takhalkhol , image="takhalkhol.png" , grid=[1,1])
+
+    test_button = PushButton(buttons , command=open_test , image="test.png" ,grid=[0,2])
+
+    warning_button = PushButton(buttons ,command=open_warning ,image='warning.png' ,grid=[1,2])
+        
+    
 #------------------------------------
 #App
 #------------------------------------
+app = App('app_lab')
+
+board()
+app.display()
