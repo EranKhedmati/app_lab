@@ -9,10 +9,11 @@
 #-----------------------------------
 #Functions
 #-----------------------------------
+
 # Chegali method
 def chegali(p: float, m: float, v: float):
     """
-        فانکشن محاسبه چگالی
+        متد محاسبه چگالی
     Args:
         p (float, optional): [چگالی]. Defaults to -1.
         m (float, optional): [جرم]. Defaults to -1.
@@ -31,7 +32,7 @@ def chegali(p: float, m: float, v: float):
 #khoon method
 def khoon(antiA , antiB , antiD):
     """
-    تایین گروه خونی
+     متد تایین گروه خونی
     Args:
         antiA (str, optional): [آنتی A]. Defaults to 0.
         antiB (str, optional): [آنتی B]. Defaults to 0.
@@ -57,7 +58,7 @@ def khoon(antiA , antiB , antiD):
 #takhmin_masafat method
 def takhmin_masafat(meghias: float, f_map: float, f_ground : float) :
     """
-    محاسبه مقیاس
+    متد محاسبه مقیاس
 
     Args:
         meghias (floatl,optional): [مقیاس] Defaults to -1 .
@@ -76,7 +77,7 @@ def takhmin_masafat(meghias: float, f_map: float, f_ground : float) :
 #takhalkhol method
 def cheshme(takhalkhol :float , v_sang :float ,v_kol :float):
     """
-    محاسبه تخلخل
+    متد محاسبه تخلخل
 
     args:
         takhal (float,optional): [تخلخل] Defaults to -1.
