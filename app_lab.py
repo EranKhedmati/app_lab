@@ -18,6 +18,8 @@ def chegali(p: float, m: float, v: float):
         return m/p
 
 
+
+
 #khoon
 def khoon(antiA , antiB , antiD):
     """
@@ -45,6 +47,8 @@ def khoon(antiA , antiB , antiD):
         print('A+')
 
 
+
+
 #takhmin_masafat
 def takhmin_masafat(meghias: float, f_map: float, f_ground : float) :
     """
@@ -64,22 +68,23 @@ def takhmin_masafat(meghias: float, f_map: float, f_ground : float) :
     else :
         return f_map/meghias
 
-
-#cheshme
-def cheshme(takhal: float, v_sang: float,v_kol: float) : 
+#takhalkhol
+def cheshme(takhalkhol :float , v_sang :float ,v_kol :float):
     """
-    چگونگی تشکیل چشمه و محاسبه تخلخل
+    محاسبه تخلخل
 
-    Args:
+    args:
         takhal (float,optional): [تخلخل] Defaults to -1.
         v_sang (float,optional): [حجم فضای خالی سنگ یا رسوب] Defaults to -1.
         v_kol (float,optional):  [حجم کل فضای سنگ یا رسوب] Defaults to -1.
     Returns : 
     [type] : [مقدار تخلخل را با توجه به ورودی برمی گرداند]
+
     """
-    if takhal == -1 :
+
+    if takhalkhol == -1 :
         return (v_sang/v_kol)*100
     elif v_sang == -1 :
-        return (takhal*v_sang)/100
+        return (takhalkhol*v_sang)/100
     else:
-        return (v_sang/takhal)*100
+        return (v_sang/takhalkhol)*100
