@@ -165,11 +165,15 @@ def board():
 
     warning_button = PushButton(buttons ,command=open_warning ,image='warning.png' ,grid=[1,2])
         
-    
+def menu_title():
+    menubar = Box(app , width="fill" , height=70)
+    menu = PushButton(menubar , text="منو" , align="right")
+    title = Text(menubar , text="آزمایشگاه علوم تجربی دهم" , size=25 , font="B Titr")
 #------------------------------------
 #App
 #------------------------------------
 app = App('app_lab')
 
+menu_title()
 board()
 app.display()
