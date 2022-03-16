@@ -1,5 +1,5 @@
 # Import
-from app_lab import chegali,khoon,takhmin_masafat
+from library import chegali,khoon,takhmin_masafat,cheshme
 #Chegali
 
 
@@ -7,7 +7,7 @@ result= chegali(p=-1,m=10,v=3)
 print('{:.2f}'.format(result))
 
 #khoon
-groop = khoon( antiA = -1, antiB = -1 , antiD = 1)
+groop = khoon( anti_a = -1, anti_b = -1 , anti_d = 1)
 print(groop)
 
 #takmin_masafat
