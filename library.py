@@ -23,27 +23,27 @@ def chegali(p: float, m: float, v: float):
 # khoon method
 
 
-def khoon(antiA, antiB, antiD):
+def khoon(anti_a, anti_b, anti_d):
     """
      متد تایین گروه خونی
     Args:
-        antiA (str, optional): [آنتی A]. Defaults to 0.
-        antiB (str, optional): [آنتی B]. Defaults to 0.
-        antiD (str, optional): [آنتی D]. Defaults to 0.
+        anti_a (str, optional): [آنتی A]. Defaults to 0.
+        anti_b (str, optional): [آنتی B]. Defaults to 0.
+        anti_d (str, optional): [آنتی D]. Defaults to 0.
     Returns:
         [type]: [گروه خونی را با توجه به ورودی برمی گرداند]
     """
-    if antiA == -1 and antiB == -1 and antiD == 1:
+    if anti_a == -1 and anti_b == -1 and anti_d == 1:
         print('O+')
-    elif antiA == -1 and antiB == 1 and antiD == -1:
+    elif anti_a == -1 and anti_b == 1 and anti_d == -1:
         print('B-')
-    elif antiA == -1 and antiB == 1 and antiD == 1:
+    elif anti_a == -1 and anti_b == 1 and anti_d == 1:
         print('B+')
-    elif antiA == 1 and antiB == 1 and antiD == 1:
+    elif anti_a == 1 and anti_b == 1 and anti_d == 1:
         print('AB+')
-    elif antiA == 1 and antiB == 1 and antiD == -1:
+    elif anti_a == 1 and anti_b == 1 and anti_d == -1:
         print('AB-')
-    elif antiA == 1 and antiB == -1 and antiD == -1:
+    elif anti_a == 1 and anti_b == -1 and anti_d == -1:
         print('A-')
     else:
         print('A+')
