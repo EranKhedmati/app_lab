@@ -34,19 +34,19 @@ def khoon(anti_a, anti_b, anti_d):
         [type]: [گروه خونی را با توجه به ورودی برمی گرداند]
     """
     if anti_a == -1 and anti_b == -1 and anti_d == 1:
-        print('O+')
+        return('O+')
     elif anti_a == -1 and anti_b == 1 and anti_d == -1:
-        print('B-')
+        return('B-')
     elif anti_a == -1 and anti_b == 1 and anti_d == 1:
-        print('B+')
+        return('B+')
     elif anti_a == 1 and anti_b == 1 and anti_d == 1:
-        print('AB+')
+        return('AB+')
     elif anti_a == 1 and anti_b == 1 and anti_d == -1:
-        print('AB-')
+        return('AB-')
     elif anti_a == 1 and anti_b == -1 and anti_d == -1:
-        print('A-')
+        return('A-')
     else:
-        print('A+')
+        return('A+')
 
 # takhmin_masafat method
 
