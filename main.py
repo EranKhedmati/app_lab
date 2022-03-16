@@ -48,50 +48,41 @@ def board():
     Warning_window.hide()
 
     # -------------------------------
-    # Open buttond
-    # -------------------------------
-    def open_chegali():
-        chegali_window.show()
-
-    def open_blood():
-        blood_window.show()
-
-    def open_maghias():
-        meghias_window.show()
-
-    def open_takhalkhol():
-        takhalkhol_window.show()
-
-    def open_test():
-        test_window.show()
-
-    def open_warning():
-        Warning_window.show()
-
-    def open_window(name:str):
+    # Open buttons
+    #--------------------------------
+    def open_window(name: str):
         if name == "chegali":
             chegali_window.show()
-
+        elif name == "blood":
+            blood_window.show()
+        elif name == "meghias":
+            meghias_window.show()
+        elif name == "takhalkhol":
+            takhalkhol_window.show()
+        elif name == "test":
+            test_window.show()
+        else:
+            Warning_window.show()
     # -------------------------------
     # Picturs of buttons
     # -------------------------------
     chegali_botton = PushButton(
-        buttons, command=open_window, image="icons\\chegali.png", grid=[0, 0],args=["chegali"])
+        buttons, command=open_window, image="icons\\chegali.png", grid=[0, 0], args=["chegali"])
 
     blood_button = PushButton(
-        buttons, command=open_blood, image="icons\\blood.png", grid=[1, 0])
+        buttons, command=open_window, image="icons\\blood.png", grid=[1, 0], args=["blood"])
 
     meghias_button = PushButton(
-        buttons, command=open_maghias, image="icons\\meghias.png", grid=[0, 1])
+        buttons, command=open_window, image="icons\\meghias.png", grid=[0, 1], args=["meghias"])
 
     takhalkhol_button = PushButton(
-        buttons, command=open_takhalkhol, image="icons\\takhalkhol.png", grid=[1, 1])
+        buttons, command=open_window, image="icons\\takhalkhol.png", grid=[1, 1], args=["takhalkhol"])
 
-    test_button = PushButton(buttons, command=open_test,
-                             image="icons\\test.png", grid=[0, 2])
+    test_button = PushButton(buttons, command=open_window,
+                             image="icons\\test.png", grid=[0, 2], args=["test"])
 
     warning_button = PushButton(
-        buttons, command=open_warning, image='icons\\warning.png', grid=[1, 2])
+        buttons, command=open_window, image='icons\\warning.png', grid=[1, 2], args=["warning"])
 
 
 def menu_title():
