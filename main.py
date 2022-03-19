@@ -1,7 +1,7 @@
 # -----------------------------------
 # Imports
 # -----------------------------------
-from guizero import App, PushButton, Box, Picture, Text, Window
+from guizero import App, PushButton, Box, Picture, Text, Window , MenuBar
 import os
 # -----------------------------------
 # Variables
@@ -12,13 +12,8 @@ import os
 # -----------------------------------
 
 # -----------------------------------
-# methods
-# -----------------------------------
-
-# -----------------------------------
 # creat board
 # -----------------------------------
-
 
 def board():
     buttons = Box(app, layout="grid")
@@ -84,6 +79,8 @@ def board():
     warning_button = PushButton(
         buttons, command=open_window, image='icons\\warning.png', grid=[1, 2], args=["warning"])
 
+def about():
+    about_window = Window(app , title="درباره" , width=400 , height=540)
 # ------------------------------------
 # App
 # ------------------------------------
@@ -91,6 +88,7 @@ app = App('app_lab')
 
 title = Text(app , text="آزمایشگاه علوم تجربی دهم" , size=25 , font="B Titr")
 
+about_menubar = MenuBar(app,toplevel=["منو"], options=[[["درباره" , about]]] )
 
 # menu_title()
 board()
