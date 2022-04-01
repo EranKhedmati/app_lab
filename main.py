@@ -28,6 +28,15 @@ def board():
     chegali_window = Window(app, title="chegali", width=400, height=530)
     chegali_window.hide()
 
+    #-------------------------------------
+    #chegali_window
+    #-------------------------------------
+    # def chegali_detail():
+    about_chegali = Box(chegali_window , border=True , width="fill" , height=200)
+    chegali_text = Text(about_chegali, text="چگالی یا دانستیه یک ماده که به آن جرم حجمی یا جرم ویژه می گویند ، یا به عبارتی دیگر جرم یک سانتی متر مکعب از یک جسم را می گویند و آن را با نماد p نشان می دهند و از رابطه ی p=m/v به دست می آید  که p چگالی ، mحجم و v حجم جسم است")
+    chegali_cal = Box(chegali_window , width="fill" , height=260 , border=True)
+    footer_box = Box(chegali_window ,width="fill" , height=70 , border=True) 
+
     blood_window = Window(app, title="blood", width=400, height=530)
     blood_window.hide()
 
@@ -89,7 +98,6 @@ def board():
 
 def about():
     about_window = Window(app, title="درباره", width=400, height=540)
-
 
 # ------------------------------------
 # App
