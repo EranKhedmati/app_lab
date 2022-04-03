@@ -23,42 +23,11 @@ def board():
             button = PushButton(buttons, grid=[x, y], padx=60, pady=60)
 
     # -------------------------------
-    # creat windows
-    # -------------------------------
-    chegali_window = Window(app, title="chegali", width=400, height=530)
-    chegali_window.hide()
-
-    #-------------------------------------
-    #chegali_window
-    #-------------------------------------
-    # def chegali_detail():
-    about_chegali = Box(chegali_window , border=True , width="fill" , height=200)
-    chegali_text = Text(about_chegali, text="چگالی یا دانستیه یک ماده که به آن جرم\n حجمی یا جرم ویژه می گویند \n، یا به عبارتی دیگر جرم یک سانتی متر \nمکعب از یک جسم را می گویند  \nو آن را با نماد p نشان می دهند و از رابطه ی p=m/vبه \nدست می آید  که p چگالی ، mحجم و v حجم جسم است")
-    chegali_cal = Box(chegali_window , width="fill" , height=260 , border=True)
-    footer_box = Box(chegali_window ,width="fill" , height=70 , border=True) 
-
-    blood_window = Window(app, title="blood", width=400, height=530)
-    blood_window.hide()
-
-    meghias_window = Window(app, title="meghias", width=400, height=530)
-    meghias_window.hide()
-
-    takhalkhol_window = Window(app, title="takhalkhol", width=400, height=530)
-    takhalkhol_window.hide()
-
-    test_window = Window(app, title="test", width=400, height=530)
-    test_window.hide()
-
-    Warning_window = Window(app, title="warning", width=400, height=530)
-    Warning_window.hide()
-
-    # -------------------------------
     # Open buttons
     # --------------------------------
     def open_window(name: str):
         if name == "chegali":
-            chegali_window.show()
-            app.hide()
+            chegali_window()
         elif name == "blood":
             blood_window.show()
             app.hide()
@@ -95,6 +64,13 @@ def board():
     warning_button = PushButton(
         buttons, command=open_window, image='icons/warning.png', grid=[1, 2], args=["warning"])
 
+    def chegali_window():
+        buttons.hide()
+        title.hide()
+        about_chegali = Box(app , border=True , width="fill" , height=150)
+        chegali_text = Text(about_chegali , text="چگالی یا دانستیه یک ماده که به آن جرم\n حجمی یا جرم ویژه می گویند \n، یا به عبارتی دیگر جرم یک سانتی متر \nمکعب از یک جسم را می گویند  \nو آن را با نماد p نشان می دهند و از رابطه ی p=m/vبه \nدست می آید  که p چگالی ، mحجم و v حجم جسم است")
+        chegali_cal_box = Box(app , width="fill" , height=250 , border=True) #cal = calculate
+        footer_box = Box(app , width="fill" ,height=100 , border=True)
 
 def about():
     about_window = Window(app, title="درباره", width=400, height=540)
@@ -102,8 +78,7 @@ def about():
 # ------------------------------------
 # App
 # ------------------------------------
-app = App('app_lab')
-
+app = App('app_lab' , width=500 , height=500)
 title = Text(app, text="آزمایشگاه علوم تجربی دهم", size=25, font="B Titr")
 
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
