@@ -122,7 +122,7 @@ warning_button = PushButton(
 
 # Box Chegalei
 boxChegalei = Box(app,visible=False,width='fill')
-btnGChegali = ButtonGroup(app, options=["چگالی", "حجم", "جرم"], selected="چگالی",
+btnGChegali = ButtonGroup(boxChegalei, options=["چگالی", "حجم", "جرم"], selected="چگالی",
     command=updateBtnGChegali)
 Text(boxChegalei,"لطفا دو مقدار را وارد کنید")
 Text(boxChegalei,"چگالی")
@@ -142,6 +142,7 @@ txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
 Text(boxKhoon , 'آنتی D')
 txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
 resultKhoon = Text(boxKhoon)
+
 
 # Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
