@@ -1,8 +1,6 @@
 # -----------------------------------
 # Imports
 # -----------------------------------
-from pydoc import text
-from turtle import width
 from guizero import App, PushButton, Box, Picture,TextBox, Text, Window, MenuBar,ButtonGroup
 
 from library import chegali
@@ -74,18 +72,20 @@ def chegaliParametersChange():
 # Groop Khooni section
 def khoonParametrChange():
     try:
-        anti_a = int(txtAntia,value)
+        anti_a = int(txtAntia.value)
     except ValueError:
         txtAntia.value=""
     try:
-        anti_b = int(txtAntib)
+        anti_b = int(txtAntib.value)
     except ValueError:
         txtAntib.value=""
     try:
-        anti_d = int(txtAntid)
+        anti_d = int(txtAntid.value)
     except ValueError:
         txtAntid.value=""
+
     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
+
 # Meghias section
 def updateBtnMeghias():
     txtMeghias.enable()
@@ -97,26 +97,30 @@ def updateBtnMeghias():
         txtFmap.disable()
     elif btnMeghias.value=="فاصله دو نقطه روی زمین":
         txtFground.disable()
+
 def meghiasParametersChange():
     try:
         meghias = float(txtMeghias.value)
     except ValueError:
         txtMeghias.value = ""
+
     try:
         f_map = float(txtFmap.value)
     except ValueError:
         txtFmap.value = ""
+
     try:
-        f_ground = float(txtFground)
+        f_ground = float(txtFground.value)
     except ValueError:
-        txtFmap.value = ""
-    if txtMeghias.enable==False and f_map>-1 and f_ground>-1:
-        p=int(-1)
+        txtFground.value = ""
+
+    if txtMeghias.enabled==False and f_map>-1 and f_ground>-1:
+        meghias=int(-1)
         txtMeghias.value = takhmin_masafat(meghias, f_map, f_ground)
-    elif txtFmap.enable==False and meghias>-1 and f_ground>-1:
+    elif txtFmap.enabled==False and meghias>-1 and f_ground>-1:
         f_map=int(-1)
         txtFmap.value=takhmin_masafat(meghias, f_map, f_ground)
-    elif txtFground.enable==False and f_map>-1 and f_ground>-1:
+    elif txtFground.enabled==False and f_map>-1 and f_ground>-1:
         f_ground = int(-1)
         txtFground.value=takhmin_masafat(meghias, f_map, f_ground)
 # ---------------------------------------------
@@ -181,9 +185,10 @@ txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
 resultKhoon = Text(boxKhoon)
 # Box meghias
 boxMeghias = Box(app , visible=False , width='fill')
-btnMeghias = ButtonGroup(app , options=["مقیاس" , "فاصله دو نقطه روی نقشه" , "فاصله دو نقطه روی زمین"] , command=updateBtnMeghias)
+btnMeghias = ButtonGroup(boxMeghias , 
+options=["مقیاس" , "فاصله دو نقطه روی نقشه" , "فاصله دو نقطه روی زمین"] , command=updateBtnMeghias,selected="مقیاس")
 Text(boxMeghias , "مقیاس")
-txtMeghias = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange)
+txtMeghias = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange,enabled=False)
 Text(boxMeghias , "فاصله روی نشه")
 txtFmap = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange)
 Text(boxMeghias , "فاصله روی زمین")
