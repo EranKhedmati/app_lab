@@ -6,6 +6,7 @@ from guizero import App, PushButton, Box, Picture,TextBox, Text, Window, MenuBar
 from library import chegali
 from library import khoon
 from library import takhmin_masafat
+from library import cheshme
 # -----------------------------------
 # CONSTANS
 # -----------------------------------
@@ -28,6 +29,8 @@ def showBox(id:int):
         boxKhoon.show()
     elif id==MEGHYAS_BOX:
         boxMeghias.show()
+    elif id==TAKHALKHOL_BOX:
+        boxTakhal.show()
 
 # -----------------------------------
 # Functions
@@ -123,6 +126,44 @@ def meghiasParametersChange():
     elif txtFground.enabled==False and f_map>-1 and f_ground>-1:
         f_ground = int(-1)
         txtFground.value=takhmin_masafat(meghias, f_map, f_ground)
+# Takhalkhol section
+def updateBtnTakhal():
+    txtTakhal.enable()
+    txtVsang.enable()
+    txtVkol.enable()
+    if btnTakhal.value=="تخلخل":
+        txtTakhal.disable()
+    elif btnTakhal.value=="حجم فضای خالی سنگ یا رسوب":
+        txtVsang.disable()
+    elif btnTakhal.value=="حجم کل فضای سنگ یا رسوب":
+        txtVkol.disable()
+
+def takhalParametersChange():
+    try:
+        takhalkhol = float(txtTakhal.value)
+    except ValueError:
+        txtTakhal.value=""
+
+    try:
+        v_sang = float(txtVsang.value)
+    except ValueError:
+        txtVsang.value=""
+
+    try:
+        v_kol = float(txtVkol.value)
+    except ValueError:
+        txtVkol.value=""
+
+    if txtTakhal.enabled==False and v_sang>-1 and v_kol>-1:
+        takhalkhol=int(-1)
+        txtTakhal.value=cheshme(takhalkhol, v_sang, v_kol)
+    elif txtVsang.enabled==False and takhalkhol>-1 and v_kol>-1 :
+        v_sang=int(-1)
+        txtVsang.value=cheshme(takhalkhol, v_sang, v_kol)
+    elif txtVkol.enabled==False and v_sang>-1 and takhalkhol>-1:
+        v_kol=int(-1)
+        txtVkol.value=cheshme(takhalkhol, v_sang, v_kol)
+
 # ---------------------------------------------
 
 
@@ -183,6 +224,7 @@ txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
 Text(boxKhoon , 'آنتی D')
 txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
 resultKhoon = Text(boxKhoon)
+
 # Box meghias
 boxMeghias = Box(app , visible=False , width='fill')
 btnMeghias = ButtonGroup(boxMeghias , 
@@ -193,6 +235,17 @@ Text(boxMeghias , "فاصله روی نشه")
 txtFmap = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange)
 Text(boxMeghias , "فاصله روی زمین")
 txtFground = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange)
+
+# Box takhalkhol
+boxTakhal = Box(app , visible=False , width='fill')
+btnTakhal = ButtonGroup(boxTakhal , options=["تخلخل", "حجم فضای خالی سنگ یا رسوب" , "حجم کل فضای کل سنگ یا رسوب"] ,selected="تخلخل",command=updateBtnTakhal)
+Text(boxTakhal, "لطفا دو مقدار را وارد کنید")
+Text(boxTakhal,'تخلخل')
+txtTakhal = TextBox(boxTakhal, width='fill' , command=takhalParametersChange,enabled=False)
+Text(boxTakhal,'حجم فضای خلی سنگ یا رسوب ')
+txtVsang = TextBox(boxTakhal , width='fill' , command=takhalParametersChange)
+Text(boxTakhal , 'حجم کل فضای سنگ یا رسوب')
+txtVkol = TextBox(boxTakhal , width='fill' , command=takhalParametersChange)
 
 # Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
