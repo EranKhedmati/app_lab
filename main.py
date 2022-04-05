@@ -207,11 +207,11 @@ boxChegalei = Box(app,visible=False,width='fill')
 btnGChegali = ButtonGroup(boxChegalei, options=["چگالی", "حجم", "جرم"], selected="چگالی",
     command=updateBtnGChegali)
 Text(boxChegalei,"لطفا دو مقدار را وارد کنید")
-Text(boxChegalei,"چگالی")
+Text(boxChegalei,"چگالی بر حسب رو")
 txtChegli=TextBox(boxChegalei,width='fill',command=chegaliParametersChange,enabled=False)
-Text(boxChegalei,"حجم")
+Text(boxChegalei,"حجم بر حسب مترمکعب")
 txtHajm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
-Text(boxChegalei,"جرم")
+Text(boxChegalei,"جرم بر حسب کیلوگرم")
 txtJerm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
 
 # Box Khoon
