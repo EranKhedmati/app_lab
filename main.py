@@ -31,6 +31,12 @@ def showBox(id:int):
         boxMeghias.show()
     elif id==TAKHALKHOL_BOX:
         boxTakhal.show()
+def hideBox():
+    boxMain.show()
+    boxChegalei.hide()
+    boxKhoon.hide()
+    boxMeghias.hide()
+    boxTakhal.hide()
 
 # -----------------------------------
 # Functions
@@ -73,55 +79,22 @@ def chegaliParametersChange():
         m=int(-1)
         txtJerm.value=chegali(p,m,v)
     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
-# Groop Khooni section
-# def khoonParametrChange():
-#     try:
-#         anti_a = int(txtAntia.value)
-#     except ValueError:
-#         txtAntia.value=""
-#     try:
-#         anti_b = int(txtAntib.value)
-#     except ValueError:
-#         txtAntib.value=""
-#     try:
-#         anti_d = int(txtAntid.value)
-#     except ValueError:
-#         txtAntid.value=""
-
-#     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
+#Groop Khooni section
 def khoonParametrChange():
-    # try:
-    #     anti_a= float(btnAntia.value)
-    # except ValueError:
-    #     anti_a=""
-    # try:
-    #     anti_b = float(btnAntib.value)
-    # except ValueError:
-    #     anti_b=""
-    # try:
-    #     anti_d=float(btnAntid.value)
-    # except ValueError:
-    #     anti_d=""
+    try:
+        anti_a = int(txtAntia.value)
+    except ValueError:
+        txtAntia.value=""
+    try:
+        anti_b = int(txtAntib.value)
+    except ValueError:
+        txtAntib.value=""
+    try:
+        anti_d = int(txtAntid.value)
+    except ValueError:
+        txtAntid.value=""
 
-    if btnAntia.value=="تشکیل رسوب":
-        anti_a = int(1)
-        khoon(anti_a, anti_b, anti_d)
-    elif btnAntia.value=="عدم تشکیل رسوب":
-        anti_a= int(-1)
-        khoon(anti_a, anti_b, anti_d)
-    elif btnAntib.value=="تشکیل رسوب":
-        anti_b = int(1)
-        khoon(anti_a, anti_b, anti_d)
-    elif btnAntib.value=="عدم تشکیل رسوب":
-        anti_b=int(-1)
-        khoon(anti_a, anti_b, anti_d)
-    elif btnAntid.value=="تشکیل رسوب":
-        anti_d=int(1)
-        khoon(anti_a, anti_b, anti_d)
-    elif btnAntid=="عدم تشکیل رسوب":
-        anti_d=int(-1)
-        khoon(anti_a, anti_b, anti_d)
-        resultKhoon.value=khoon(anti_a, anti_b, anti_d)
+    resultKhoon.value = khoon(anti_a, anti_b, anti_d)
 
 # Meghias section
 def updateBtnMeghias():
@@ -247,23 +220,19 @@ Text(boxChegalei,"حجم بر حسب مترمکعب")
 txtHajm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
 Text(boxChegalei,"جرم بر حسب کیلوگرم")
 txtJerm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
+btnExitChegali=PushButton(boxChegalei,command=hideBox,text="صفحه ی اصلی")
 
 # Box Khoon
 boxKhoon = Box(app , visible=False , width='fill')
-# Text(boxKhoon , "لطفا مشخص کنید اگر خون با ماده رسوب کرده است عدد ۱ و در غیر اینصورت عدد -۱ را وارد کنید")
-# Text(boxKhoon , "آنتی A")
-# txtAntia=TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-# Text(boxKhoon , 'آنتی B')
-# txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-# Text(boxKhoon , 'آنتی D')
-# txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-Text(boxKhoon,"آنتی A")
-btnAntia = ButtonGroup(boxKhoon , options=["تشکیل رسوب" , "عدم تشکیل رسوب"] ,selected="تشکیل رسوب", command=khoonParametrChange)
-Text(boxKhoon , "آنتی B")
-btnAntib = ButtonGroup(boxKhoon , options=["تشکیل رسوب" ,"عدم تشکیل رسوب"] ,selected="تشکیل رسوب", command=khoonParametrChange)
-Text(boxKhoon , "آنتی D")
-btnAntid = ButtonGroup(boxKhoon , options=["تشکیل رسوب" ,"عدم تشکیل رسوب"] , selected="تشکیل رسوب",command=khoonParametrChange)
+Text(boxKhoon , "لطفا مشخص کنید اگر خون با ماده رسوب کرده است عدد ۱ و در غیر اینصورت عدد -۱ را وارد کنید")
+Text(boxKhoon , "آنتی A")
+txtAntia=TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+Text(boxKhoon , 'آنتی B')
+txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+Text(boxKhoon , 'آنتی D')
+txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
 resultKhoon = Text(boxKhoon)
+btnExitKhoon=PushButton(boxKhoon,command=hideBox,text="صفحه ی اصلی")
 
 # Box meghias
 boxMeghias = Box(app , visible=False , width='fill')
@@ -275,6 +244,7 @@ Text(boxMeghias , "فاصله روی نشه")
 txtFmap = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange)
 Text(boxMeghias , "فاصله روی زمین")
 txtFground = TextBox(boxMeghias , width='fill' , command=meghiasParametersChange)
+btnExitMeghias=PushButton(boxMeghias,command=hideBox,text="صفحه ی اصلی")
 
 # Box takhalkhol
 boxTakhal = Box(app , visible=False , width='fill')
@@ -286,6 +256,7 @@ Text(boxTakhal,'حجم فضای خلی سنگ یا رسوب ')
 txtVsang = TextBox(boxTakhal , width='fill' , command=takhalParametersChange)
 Text(boxTakhal , 'حجم کل فضای سنگ یا رسوب')
 txtVkol = TextBox(boxTakhal , width='fill' , command=takhalParametersChange)
+btnExiTakhal=PushButton(boxTakhal,command=hideBox,text="صفحه ی اصلی")
 
 # Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
