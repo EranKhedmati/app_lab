@@ -72,22 +72,56 @@ def chegaliParametersChange():
     elif txtJerm.enabled==False and p>-1 and v>-1:
         m=int(-1)
         txtJerm.value=chegali(p,m,v)
-# Groop Khooni section
-def khoonParametrChange():
-    try:
-        anti_a = int(txtAntia.value)
-    except ValueError:
-        txtAntia.value=""
-    try:
-        anti_b = int(txtAntib.value)
-    except ValueError:
-        txtAntib.value=""
-    try:
-        anti_d = int(txtAntid.value)
-    except ValueError:
-        txtAntid.value=""
-
     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
+# Groop Khooni section
+# def khoonParametrChange():
+#     try:
+#         anti_a = int(txtAntia.value)
+#     except ValueError:
+#         txtAntia.value=""
+#     try:
+#         anti_b = int(txtAntib.value)
+#     except ValueError:
+#         txtAntib.value=""
+#     try:
+#         anti_d = int(txtAntid.value)
+#     except ValueError:
+#         txtAntid.value=""
+
+#     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
+def khoonParametrChange():
+    # try:
+    #     anti_a= float(btnAntia.value)
+    # except ValueError:
+    #     anti_a=""
+    # try:
+    #     anti_b = float(btnAntib.value)
+    # except ValueError:
+    #     anti_b=""
+    # try:
+    #     anti_d=float(btnAntid.value)
+    # except ValueError:
+    #     anti_d=""
+
+    if btnAntia.value=="تشکیل رسوب":
+        anti_a = int(1)
+        khoon(anti_a, anti_b, anti_d)
+    elif btnAntia.value=="عدم تشکیل رسوب":
+        anti_a= int(-1)
+        khoon(anti_a, anti_b, anti_d)
+    elif btnAntib.value=="تشکیل رسوب":
+        anti_b = int(1)
+        khoon(anti_a, anti_b, anti_d)
+    elif btnAntib.value=="عدم تشکیل رسوب":
+        anti_b=int(-1)
+        khoon(anti_a, anti_b, anti_d)
+    elif btnAntid.value=="تشکیل رسوب":
+        anti_d=int(1)
+        khoon(anti_a, anti_b, anti_d)
+    elif btnAntid=="عدم تشکیل رسوب":
+        anti_d=int(-1)
+        khoon(anti_a, anti_b, anti_d)
+        resultKhoon.value=khoon(anti_a, anti_b, anti_d)
 
 # Meghias section
 def updateBtnMeghias():
@@ -216,13 +250,19 @@ txtJerm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
 
 # Box Khoon
 boxKhoon = Box(app , visible=False , width='fill')
-Text(boxKhoon , "لطفا مشخص کنید اگر خون با ماده رسوب کرده است عدد ۱ و در غیر اینصورت عدد -۱ را وارد کنید")
-Text(boxKhoon , "آنتی A")
-txtAntia=TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-Text(boxKhoon , 'آنتی B')
-txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-Text(boxKhoon , 'آنتی D')
-txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+# Text(boxKhoon , "لطفا مشخص کنید اگر خون با ماده رسوب کرده است عدد ۱ و در غیر اینصورت عدد -۱ را وارد کنید")
+# Text(boxKhoon , "آنتی A")
+# txtAntia=TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+# Text(boxKhoon , 'آنتی B')
+# txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+# Text(boxKhoon , 'آنتی D')
+# txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+Text(boxKhoon,"آنتی A")
+btnAntia = ButtonGroup(boxKhoon , options=["تشکیل رسوب" , "عدم تشکیل رسوب"] ,selected="تشکیل رسوب", command=khoonParametrChange)
+Text(boxKhoon , "آنتی B")
+btnAntib = ButtonGroup(boxKhoon , options=["تشکیل رسوب" ,"عدم تشکیل رسوب"] ,selected="تشکیل رسوب", command=khoonParametrChange)
+Text(boxKhoon , "آنتی D")
+btnAntid = ButtonGroup(boxKhoon , options=["تشکیل رسوب" ,"عدم تشکیل رسوب"] , selected="تشکیل رسوب",command=khoonParametrChange)
 resultKhoon = Text(boxKhoon)
 
 # Box meghias
