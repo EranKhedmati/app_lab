@@ -6,7 +6,7 @@ from turtle import width
 from guizero import App, PushButton, Box, Picture,TextBox, Text, Window, MenuBar,ButtonGroup
 
 from library import chegali
-
+from library import khoon
 # -----------------------------------
 # CONSTANS
 # -----------------------------------
@@ -25,6 +25,8 @@ def showBox(id:int):
     boxMain.hide()
     if id==CHEGHALEY_BOX:
         boxChegalei.show()
+    elif id==GOROOH_KHOONEI_BOX:
+        boxKhoon.show()
 
 # -----------------------------------
 # Functions
@@ -66,6 +68,20 @@ def chegaliParametersChange():
     elif txtJerm.enabled==False and p>-1 and v>-1:
         m=int(-1)
         txtJerm.value=chegali(p,m,v)
+def khoonParametrChange():
+    try:
+        anti_a = int(txtAntia,value)
+    except ValueError:
+        txtAntia.value=""
+    try:
+        anti_b = int(txtAntib)
+    except ValueError:
+        txtAntib.value=""
+    try:
+        anti_d = int(txtAntid)
+    except ValueError:
+        txtAntid.value=""
+    resultKhoon.value = khoon(anti_a, anti_b, anti_d)
 # ---------------------------------------------
 
 
@@ -116,9 +132,18 @@ txtHajm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
 Text(boxChegalei,"جرم")
 txtJerm=TextBox(boxChegalei,width='fill',command=chegaliParametersChange)
 
+# Box Khoon
+boxKhoon = Box(app , visible=False , width='fill')
+Text(boxKhoon , "لطفا مشخص کنید اگر خون با ماده رسوب کرده است عدد ۱ و در غیر اینصورت عدد -۱ را وارد کنید")
+Text(boxKhoon , "آنتی A")
+txtAntia=TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+Text(boxKhoon , 'آنتی B')
+txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+Text(boxKhoon , 'آنتی D')
+txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
+resultKhoon = Text(boxKhoon)
 
-
-
+# Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
 
 # menu_title()
