@@ -7,6 +7,8 @@ from library import chegali
 from library import khoon
 from library import takhmin_masafat
 from library import cheshme
+
+import os
 # -----------------------------------
 # CONSTANS
 # -----------------------------------
@@ -35,6 +37,8 @@ def showBox(id: int):
         boxMeghias.show()
     elif id == TAKHALKHOL_BOX:
         boxTakhal.show()
+    elif id == ALAMAT_BOX:
+        boxWarning.show()
 
 
 def hideBox():
@@ -43,7 +47,7 @@ def hideBox():
     boxKhoon.hide()
     boxMeghias.hide()
     boxTakhal.hide()
-
+    boxWarning.hide()
 # -----------------------------------
 # Functions
 # -----------------------------------
@@ -196,7 +200,10 @@ def takhalParametersChange():
     elif txtVkol.enabled == False and v_sang > -1 and takhalkhol > -1:
         v_kol = int(-1)
         txtVkol.value = cheshme(takhalkhol, v_sang, v_kol)
-
+# Warning section
+def imagePicture():
+    for picture in pictures:
+        picture.image = icons.pop()
 # ---------------------------------------------
 
 
@@ -301,7 +308,23 @@ Text(boxTakhal, 'حجم کل فضای سنگ یا رسوب')
 txtVkol = TextBox(boxTakhal, width='fill', command=takhalParametersChange)
 btnExiTakhal = PushButton(boxTakhal, command=hideBox, text="صفحه ی اصلی")
 
+#Box Warning
+boxWarning = Box(app , visible=False , width="fill")
+
+iconDir = "res/wraningicons"
+icons = [os.path.join(iconDir,f)for f in os.listdir(iconDir)]
+
+pictures = []
+picture = Picture(boxWarning)
+pictures.append(picture)
+
+btnRight = PushButton(boxWarning , text='قبل' , align="right" ,height=10)
+btnLeft = PushButton(boxWarning , text="بعد" , align="left" ,height=10)
+
+btnExitwarning = PushButton(boxWarning ,command=hideBox ,text="صفحه اصلی" , align="bottom")
+
 # Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
 
+imagePicture()
 app.display()
