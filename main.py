@@ -8,6 +8,8 @@ from library import khoon
 from library import takhmin_masafat
 from library import cheshme
 
+from random import shuffle
+
 import os
 # -----------------------------------
 # CONSTANS
@@ -39,7 +41,9 @@ def showBox(id: int):
         boxTakhal.show()
     elif id == ALAMAT_BOX:
         boxWarning.show()
-
+    elif id == AZMOON_BOX:
+        azmoonBox.show()
+        setupRound()
 
 def hideBox():
     boxMain.show()
@@ -91,22 +95,6 @@ def chegaliParametersChange():
     elif txtJerm.enabled == False and p > -1 and v > -1:
         m = int(-1)
         txtJerm.value = chegali(p, m, v)
-# Groop Khooni section
-# def khoonParametrChange():
-#     try:
-#         anti_a = int(txtAntia.value)
-#     except ValueError:
-#         txtAntia.value=""
-#     try:
-#         anti_b = int(txtAntib.value)
-#     except ValueError:
-#         txtAntib.value=""
-#     try:
-#         anti_d = int(txtAntid.value)
-#     except ValueError:
-#         txtAntid.value=""
-#     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
-
 
 def khoonParametrChange():
     try:
@@ -122,6 +110,12 @@ def khoonParametrChange():
     except ValueError:
         anti_d = ""
     resultKhoon.value = khoon(anti_a, anti_b, anti_d)
+    if sldAntia.value == 0:
+        resultKhoon.value = ""
+    elif sldAntib.value == 0:
+        resultKhoon.value = ""
+    elif sldAntid.value == 0:
+        resultKhoon.value = ""
 
 # Meghias section
 def updateBtnMeghias():
@@ -201,9 +195,16 @@ def takhalParametersChange():
         v_kol = int(-1)
         txtVkol.value = cheshme(takhalkhol, v_sang, v_kol)
 # Warning section
-def imagePicture():
-    for picture in pictures:
-        picture.image = icons.pop()
+
+
+#Game Section
+def setupRound():
+    for x in range(3):
+        for y in range(3):
+            btnGame = PushButton(azmoonBox , grid=[x,y])
+            buttonGame.append(btnGame)
+    for btnGame in buttonGame:
+        btnGame.image = pictureGame.pop()
 # ---------------------------------------------
 
 
@@ -257,19 +258,6 @@ txtJerm = TextBox(boxChegalei, width='fill', command=chegaliParametersChange)
 btnExitChegali = PushButton(boxChegalei, command=hideBox, text="صفحه ی اصلی")
 
 # Box Khoon
-
-# boxKhoon = Box(app , visible=False , width='fill')
-# Text(boxKhoon , "لطفا مشخص کنید اگر خون با ماده رسوب کرده است عدد ۱ و در غیر اینصورت عدد -۱ را وارد کنید")
-# Text(boxKhoon , "آنتی A")
-# txtAntia=TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-# Text(boxKhoon , 'آنتی B')
-# txtAntib = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-# Text(boxKhoon , 'آنتی D')
-# txtAntid = TextBox(boxKhoon , width='fill' , command=khoonParametrChange)
-# resultKhoon = Text(boxKhoon)
-# btnExitKhoon=PushButton(boxKhoon,command=hideBox,text="صفحه ی اصلی")
-
-
 boxKhoon = Box(app, visible=False, width="fill")
 Text(boxKhoon, "لطفا در صورت رسوب خون عدد ۱ و در غیر این صورت عدد -۱ \n را وارد کنید")
 Text(boxKhoon, "آنتی A")
@@ -310,21 +298,27 @@ btnExiTakhal = PushButton(boxTakhal, command=hideBox, text="صفحه ی اصلی
 
 #Box Warning
 boxWarning = Box(app , visible=False , width="fill")
-
 iconDir = "res/wraningicons"
 icons = [os.path.join(iconDir,f)for f in os.listdir(iconDir)]
-
-pictures = []
-picture = Picture(boxWarning)
-pictures.append(picture)
-
+iconList= []
+icon = Picture(boxWarning)
+icons.append(icon)
 btnRight = PushButton(boxWarning , text='قبل' , align="right" ,height=10)
 btnLeft = PushButton(boxWarning , text="بعد" , align="left" ,height=10)
-
 btnExitwarning = PushButton(boxWarning ,command=hideBox ,text="صفحه اصلی" , align="bottom")
+
+#Box Game
+azmoonBox = Box(app , visible=False , width="fill" ,layout="grid")
+txtGame = ["برق" , "قابل اشتعال" , "قابل انفجار" , "خورنده" , "مواد زیستی" , "اکسید اسید" , "پسماند" , "سمی" , "زیان آور"]
+
+pictureDir = "res/gamepicture"
+pictureGame = [os.path.join(pictureDir,f) for f in os.listdir(pictureDir)]
+shuffle(pictureGame)
+
+buttonGame = []
 
 # Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
 
-imagePicture()
+
 app.display()
