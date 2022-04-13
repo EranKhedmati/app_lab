@@ -8,9 +8,9 @@ from library import khoon
 from library import takhmin_masafat
 from library import cheshme
 
-from random import shuffle
-
 import os
+
+from random import shuffle
 # -----------------------------------
 # CONSTANS
 # -----------------------------------
@@ -26,11 +26,20 @@ AZMOON_BOX = int(6)
 # Variables
 # -----------------------------------
 
-
 def showBox(id: int):
     boxMain.hide()
+    boxChegalei.hide()
+    boxKhoon.hide()
+    boxTakhal.hide()
+    boxWarning.hide()
+    boxMeghias.hide()
+    boxGame.hide()
+
+    btnBackMain.show()
+    
     if id== MAIN_BOX:
         boxMain.show()
+        btnBackMain.hide()
     elif id == CHEGHALEY_BOX:
         boxChegalei.show()
     elif id == GOROOH_KHOONEI_BOX:
@@ -42,16 +51,9 @@ def showBox(id: int):
     elif id == ALAMAT_BOX:
         boxWarning.show()
     elif id == AZMOON_BOX:
-        azmoonBox.show()
-        setupRound()
+        boxGame.show()
+        btnGame.visible = True
 
-def hideBox():
-    boxMain.show()
-    boxChegalei.hide()
-    boxKhoon.hide()
-    boxMeghias.hide()
-    boxTakhal.hide()
-    boxWarning.hide()
 # -----------------------------------
 # Functions
 # -----------------------------------
@@ -95,7 +97,7 @@ def chegaliParametersChange():
     elif txtJerm.enabled == False and p > -1 and v > -1:
         m = int(-1)
         txtJerm.value = chegali(p, m, v)
-
+# Groop Khooni section
 def khoonParametrChange():
     try:
         anti_a = int(sldAntia.value)
@@ -116,6 +118,7 @@ def khoonParametrChange():
         resultKhoon.value = ""
     elif sldAntid.value == 0:
         resultKhoon.value = ""
+
 
 # Meghias section
 def updateBtnMeghias():
@@ -165,9 +168,8 @@ def updateBtnTakhal():
         txtTakhal.disable()
     elif btnTakhal.value == "حجم فضای خالی سنگ یا رسوب":
         txtVsang.disable()
-    elif btnTakhal.value == "حجم کل فضای سنگ یا رسوب":
+    elif btnTakhal.value == "حجم کل فضای کل سنگ یا رسوب":
         txtVkol.disable()
-
 
 def takhalParametersChange():
     try:
@@ -195,18 +197,30 @@ def takhalParametersChange():
         v_kol = int(-1)
         txtVkol.value = cheshme(takhalkhol, v_sang, v_kol)
 # Warning section
+def swapPicture(i:int):
+    idx=icons.index(picture.image)
 
-
+    if i>0:
+        idx=idx+1
+        if idx>len(icons)-1:
+            idx=0
+    else:
+        idx=idx-1
+    
+    picture.image=icons[idx]
+        
 #Game Section
 def setupRound():
-    for x in range(3):
-        for y in range(3):
-            btnGame = PushButton(azmoonBox , grid=[x,y])
-            buttonGame.append(btnGame)
-    for btnGame in buttonGame:
-        btnGame.image = pictureGame.pop()
-# ---------------------------------------------
+    txtGame.value = txtDir[0]
+    buttonGame.update_command(winerGame,args=[False])
 
+def winerGame():
+    if id(obj)
+
+    setupRound()
+
+
+#Menu bar
 
 def about():
     about_window = Window(app, title="درباره", width=400, height=540)
@@ -255,9 +269,10 @@ Text(boxChegalei, "حجم بر حسب مترمکعب")
 txtHajm = TextBox(boxChegalei, width='fill', command=chegaliParametersChange)
 Text(boxChegalei, "جرم بر حسب کیلوگرم")
 txtJerm = TextBox(boxChegalei, width='fill', command=chegaliParametersChange)
-btnExitChegali = PushButton(boxChegalei, command=hideBox, text="صفحه ی اصلی")
+
 
 # Box Khoon
+
 boxKhoon = Box(app, visible=False, width="fill")
 Text(boxKhoon, "لطفا در صورت رسوب خون عدد ۱ و در غیر این صورت عدد -۱ \n را وارد کنید")
 Text(boxKhoon, "آنتی A")
@@ -267,7 +282,7 @@ sldAntib = Slider(boxKhoon, start=-1, end=1, command=khoonParametrChange)
 Text(boxKhoon, "آنتی D")
 sldAntid = Slider(boxKhoon, start=-1, end=1, command=khoonParametrChange)
 resultKhoon = Text(boxKhoon, size=20)
-btnExitKhoon = PushButton(boxKhoon, command=hideBox, text="صفحه ی اصلی")
+
 
 # Box meghias
 boxMeghias = Box(app, visible=False, width='fill')
@@ -280,7 +295,7 @@ Text(boxMeghias, "فاصله روی نشه")
 txtFmap = TextBox(boxMeghias, width='fill', command=meghiasParametersChange)
 Text(boxMeghias, "فاصله روی زمین")
 txtFground = TextBox(boxMeghias, width='fill', command=meghiasParametersChange)
-btnExitMeghias = PushButton(boxMeghias, command=hideBox, text="صفحه ی اصلی")
+
 
 # Box takhalkhol
 boxTakhal = Box(app, visible=False, width='fill')
@@ -294,31 +309,56 @@ Text(boxTakhal, 'حجم فضای خلی سنگ یا رسوب ')
 txtVsang = TextBox(boxTakhal, width='fill', command=takhalParametersChange)
 Text(boxTakhal, 'حجم کل فضای سنگ یا رسوب')
 txtVkol = TextBox(boxTakhal, width='fill', command=takhalParametersChange)
-btnExiTakhal = PushButton(boxTakhal, command=hideBox, text="صفحه ی اصلی")
+
 
 #Box Warning
 boxWarning = Box(app , visible=False , width="fill")
+
 iconDir = "res/wraningicons"
 icons = [os.path.join(iconDir,f)for f in os.listdir(iconDir)]
-iconList= []
-icon = Picture(boxWarning)
-icons.append(icon)
-btnRight = PushButton(boxWarning , text='قبل' , align="right" ,height=10)
-btnLeft = PushButton(boxWarning , text="بعد" , align="left" ,height=10)
-btnExitwarning = PushButton(boxWarning ,command=hideBox ,text="صفحه اصلی" , align="bottom")
+
+picture = Picture(boxWarning)
+picture.image=icons[0]
+
+btnRight = PushButton(boxWarning ,command=swapPicture,args=[-1], text='قبل→' , align="right" ,height=10)
+btnLeft = PushButton(boxWarning , command=swapPicture,args=[+1],text="←بعد" , align="left" ,height=10)
+
+btnBackMain = PushButton(app ,command=showBox,args=[MAIN_BOX],
+width='fill' ,text="برگشت به صفحه اصلی →" , align="bottom",visible=False)
 
 #Box Game
-azmoonBox = Box(app , visible=False , width="fill" ,layout="grid")
-txtGame = ["برق" , "قابل اشتعال" , "قابل انفجار" , "خورنده" , "مواد زیستی" , "اکسید اسید" , "پسماند" , "سمی" , "زیان آور"]
+boxGame = Box(app , visible=False , width="fill")
 
-pictureDir = "res/gamepicture"
-pictureGame = [os.path.join(pictureDir,f) for f in os.listdir(pictureDir)]
-shuffle(pictureGame)
+txtGame = Text(boxGame)
+txtDir = ["برق" , "قابل انفجار" , "قابل اشتعال" , "خورنده" , "مواد زیستی" ,"اکسید اسید" , "پسماند" ,"سمی" , "زیان آور"]
+shuffle(txtDir)
 
+
+gameDir = "res/gamepicture"
+gameimg = [os.path.join(gameDir,f) for f in os.listdir(gameDir)]
+
+buttonBox = Box(boxGame , layout="grid")
 buttonGame = []
+
+for x in range(3):
+    for y in range(3):
+        btnGame = PushButton(buttonBox , grid=[x,y])
+        buttonGame.append(btnGame)
+
+btnBargh = PushButton(buttonBox , image="res/gamepicture/bargh.png" , args=["BARGH"] , grid=[0,0]) #برق
+btnEnfejar = PushButton(buttonBox , image="res/gamepicture/ghabel enfegar.png" , args=["ENFEJAR"],grid=[1,0])#قابل انفجار
+btnEshteal = PushButton(buttonBox , image="res/gamepicture/ghabel eshteghal.png" , args=["ESHTEAL"] , grid=[2,0])#قابل اشتعال
+btnKhorande = PushButton(buttonBox , image="res/gamepicture/khorande.png" , args=["KHORANDE"] , grid=[0,1])#خورنده
+btnZisti = PushButton(buttonBox , image="res/gamepicture/mavad zisti.png" , args=["ZISTI"] , grid=[1,1])#مواد زیستی
+btnOccid = PushButton(buttonBox , image="res/gamepicture/occid asid.png" , args=["OCCID"], grid=[2,1])#اکسید اسید
+btnPasmand = PushButton(buttonBox , image="res/gamepicture/pasmand.png" , args=["PASMAND"] ,grid=[0,2])#پسماند
+btnSammi = PushButton(buttonBox , image="res/gamepicture/sammi.png" , args=["SAMMI"] , grid=[1,2])
+btnZian = PushButton(buttonBox , image="res/gamepicture/zian avar.png" , args=["ZIAN"] , grid=[2,2])#زیان آور
+
+resultGame = Text(boxGame)
 
 # Menu bar
 about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
 
-
+winerGame()
 app.display()
