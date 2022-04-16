@@ -1,6 +1,8 @@
 # -----------------------------------
 # Imports
 # -----------------------------------
+from secrets import choice
+from time import time
 from guizero import App, PushButton, Box, Picture, TextBox, Text, Window, MenuBar, ButtonGroup, Slider
 
 from library import chegali
@@ -22,10 +24,25 @@ MEGHYAS_BOX = int(4)
 ALAMAT_BOX = int(5)
 AZMOON_BOX = int(6)
 
+LIST_AZMOON = ["برق" , "قابل انفجار" , "قابل اشتعال" , "خورنده" , "مواد زیستی" ,"اکسید اسید" , "پسماند" ,"سمی" , "زیان آور"]
+AZMOON_BARGH=int(0)
+AZMOON_ENFEJAR=int(1)
+AZMOON_ESHTEAL=int(2)
+AZMOON_KHORANDE=int(3)
+AZMOON_ZISTI=int(4)
+AZMOON_ACID=int(5)
+AZMOON_PASMAND=int(6)
+AZMOON_SAMMI=int(7)
+AZMOON_ZEYAN=int(8)
 # -----------------------------------
 # Variables
 # -----------------------------------
 
+# -----------------------------------
+# Functions
+# -----------------------------------
+
+# Main Section
 def showBox(id: int):
     boxMain.hide()
     boxChegalei.hide()
@@ -51,14 +68,11 @@ def showBox(id: int):
     elif id == ALAMAT_BOX:
         boxWarning.show()
     elif id == AZMOON_BOX:
+        setupGame()
         boxGame.show()
-        btnGame.visible = True
 
-# -----------------------------------
-# Functions
-# -----------------------------------
+
 # Chegali Section
-
 
 def updateBtnGChegali():
     txtChegli.enable()
@@ -97,6 +111,7 @@ def chegaliParametersChange():
     elif txtJerm.enabled == False and p > -1 and v > -1:
         m = int(-1)
         txtJerm.value = chegali(p, m, v)
+
 # Groop Khooni section
 def khoonParametrChange():
     try:
@@ -210,26 +225,46 @@ def swapPicture(i:int):
     picture.image=icons[idx]
         
 #Game Section
-def setupRound():
-    txtGame.value = txtDir[0]
-    buttonGame.update_command(winerGame,args=[False])
+def setupGame():
+    txtSoal.value = choice(LIST_AZMOON)
+    timer.value=30
+    btnReset.hide()
+    txtNatije.hide()
+    txtEmteyaz.value=0
+    buttonBox.show()
+    txtSoal.show()
 
-def winerGame():
-    if id(obj)
+def checkGame(idx: int):
+    if idx==LIST_AZMOON.index(txtSoal.value):
+        txtEmteyaz.value=int(txtEmteyaz.value)+1
+    else:
+        txtEmteyaz.value=int(txtEmteyaz.value)-1
 
-    setupRound()
+    txtSoal.value = choice(LIST_AZMOON)
 
+def reduce_time():
+    timer.value = int(timer.value) - 1
+    # is it game over?
+    if int(timer.value) < 0:
+        timer.value=0
+        txtNatije.value = "زمان آزمون به پایان رسید امتیاز شما = " + txtEmteyaz.value
+        txtNatije.show()
+        btnReset.show()
+        # hide the game
+        buttonBox.hide()
+        txtSoal.hide()
 
 #Menu bar
 
 def about():
-    about_window = Window(app, title="درباره", width=400, height=540)
+    infoText="سرگروه: عرفان خدمتی" + "\n" + "عضو گروه: صالح بازماندگان" + "\n" + "کد اثر: 534785"
+    app.info("سازنده", infoText)
 
 
 # ------------------------------------
 # App
 # ------------------------------------
-app = App('app_lab', width=500, height=500)
+app = App(title="icons/app.jpg", width=500, height=500)
 title = Text(app, text="آزمایشگاه علوم تجربی دهم", size=25, font="B Titr")
 
 # Main Box
@@ -327,12 +362,16 @@ btnBackMain = PushButton(app ,command=showBox,args=[MAIN_BOX],
 width='fill' ,text="برگشت به صفحه اصلی →" , align="bottom",visible=False)
 
 #Box Game
-boxGame = Box(app , visible=False , width="fill")
+boxGame = Box(app , visible=False , width="400",border="2")
 
-txtGame = Text(boxGame)
-txtDir = ["برق" , "قابل انفجار" , "قابل اشتعال" , "خورنده" , "مواد زیستی" ,"اکسید اسید" , "پسماند" ,"سمی" , "زیان آور"]
-shuffle(txtDir)
 
+top_box = Box(boxGame, align="top", width="fill")
+Text(top_box, align="left", text="امتیاز ")
+txtEmteyaz = Text(top_box, text="4", align="left")
+timer = Text(top_box, text="30", align="right")
+Text(top_box, text="زمان", align="right")
+
+txtSoal = Text(boxGame,size=14,color="#0099ff")
 
 gameDir = "res/gamepicture"
 gameimg = [os.path.join(gameDir,f) for f in os.listdir(gameDir)]
@@ -340,25 +379,21 @@ gameimg = [os.path.join(gameDir,f) for f in os.listdir(gameDir)]
 buttonBox = Box(boxGame , layout="grid")
 buttonGame = []
 
-for x in range(3):
-    for y in range(3):
-        btnGame = PushButton(buttonBox , grid=[x,y])
-        buttonGame.append(btnGame)
 
-btnBargh = PushButton(buttonBox , image="res/gamepicture/bargh.png" , args=["BARGH"] , grid=[0,0]) #برق
-btnEnfejar = PushButton(buttonBox , image="res/gamepicture/ghabel enfegar.png" , args=["ENFEJAR"],grid=[1,0])#قابل انفجار
-btnEshteal = PushButton(buttonBox , image="res/gamepicture/ghabel eshteghal.png" , args=["ESHTEAL"] , grid=[2,0])#قابل اشتعال
-btnKhorande = PushButton(buttonBox , image="res/gamepicture/khorande.png" , args=["KHORANDE"] , grid=[0,1])#خورنده
-btnZisti = PushButton(buttonBox , image="res/gamepicture/mavad zisti.png" , args=["ZISTI"] , grid=[1,1])#مواد زیستی
-btnOccid = PushButton(buttonBox , image="res/gamepicture/occid asid.png" , args=["OCCID"], grid=[2,1])#اکسید اسید
-btnPasmand = PushButton(buttonBox , image="res/gamepicture/pasmand.png" , args=["PASMAND"] ,grid=[0,2])#پسماند
-btnSammi = PushButton(buttonBox , image="res/gamepicture/sammi.png" , args=["SAMMI"] , grid=[1,2])
-btnZian = PushButton(buttonBox , image="res/gamepicture/zian avar.png" , args=["ZIAN"] , grid=[2,2])#زیان آور
+btnBargh = PushButton(buttonBox , image="res/gamepicture/bargh.png" ,command=checkGame, args=[AZMOON_BARGH] , grid=[0,0]) #برق
+btnEnfejar = PushButton(buttonBox , image="res/gamepicture/ghabel enfegar.png" ,command=checkGame, args=[AZMOON_ENFEJAR],grid=[1,0])#قابل انفجار
+btnEshteal = PushButton(buttonBox , image="res/gamepicture/ghabel eshteghal.png" ,command=checkGame, args=[AZMOON_ESHTEAL] , grid=[2,0])#قابل اشتعال
+btnKhorande = PushButton(buttonBox , image="res/gamepicture/khorande.png" ,command=checkGame, args=[AZMOON_KHORANDE] , grid=[0,1])#خورنده
+btnZisti = PushButton(buttonBox , image="res/gamepicture/mavad zisti.png" ,command=checkGame, args=[AZMOON_ZISTI] , grid=[1,1])#مواد زیستی
+btnOccid = PushButton(buttonBox , image="res/gamepicture/occid asid.png" ,command=checkGame, args=[AZMOON_ACID], grid=[2,1])#اکسید اسید
+btnPasmand = PushButton(buttonBox , image="res/gamepicture/pasmand.png" ,command=checkGame, args=[AZMOON_PASMAND] ,grid=[0,2])#پسماند
+btnSammi = PushButton(buttonBox , image="res/gamepicture/sammi.png" ,command=checkGame, args=[AZMOON_SAMMI] , grid=[1,2])
+btnZian = PushButton(buttonBox , image="res/gamepicture/zian avar.png" ,command=checkGame, args=[AZMOON_ZEYAN] , grid=[2,2])#زیان آور
 
-resultGame = Text(boxGame)
+txtNatije = Text(boxGame,size=14,color="red",visible=False)
+btnReset=PushButton(boxGame,command=setupGame,text="از اول⟳",visible=False)
 
 # Menu bar
-about_menubar = MenuBar(app, toplevel=["منو"], options=[[["درباره", about]]])
-
-winerGame()
+about_menubar = MenuBar(app, toplevel=["منو"], options=[[["سازنده", about]]])
+app.repeat(1000, reduce_time)
 app.display()
